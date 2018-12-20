@@ -1,5 +1,10 @@
-<div class="col-xs-2 pull-right">
+<div style="float: right">
   <p>
-    <span id="status">{{ state | async }}</span>
+    <span id="status">{{ state$ | async }}</span>
+  </p>
+</div>
+<div>
+  <p>
+    <span *ngIf="data$ | appData$ | async as data">{{ data.received }} ({{ data.interval }})</span>
   </p>
 </div>

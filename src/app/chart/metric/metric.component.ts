@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Metric } from '../../model/metric.dto';
 import { MetricsService } from '../../service/metrics.service';
 
+const HOURS: number[] = Array.from(Array(24).keys());
+
 @Component({
   selector: 'app-metric',
   templateUrl: './metric.component.html',
@@ -9,10 +11,8 @@ import { MetricsService } from '../../service/metrics.service';
 })
 export class MetricComponent implements OnInit {
 
-  public lineChartData: ChartData[] = [{ data: [], label: 'Ticks by the hour' }];
-  public lineChartLabels: string[] = [
-    '00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
-    '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
+  public lineChartData: ChartData[] = [{ data: [], label: 'Impulses' }];
+  public lineChartLabels: string[] = HOURS.map(it => this.generateLabel(it));
 
   public lineChartOptions: any = { responsive: true };
 
@@ -43,6 +43,15 @@ export class MetricComponent implements OnInit {
     this.lineChartData = clone;
   }
 
+  private generateLabel(hour: number): string {
+    if (hour == 0) {
+      return '23-00';
+    }
+    const fromHour: string = hour - 1 + '';
+    const toHour: string = hour + '';
+    return fromHour.padStart(2, '0') + '-' + toHour.padStart(2, '0');
+  }
+
   // events
   public chartClicked(e: any): void {
     console.log(e);
@@ -55,5 +64,5 @@ export class MetricComponent implements OnInit {
 
 interface ChartData {
   data: number[],
-  label: string
+  label: string | string[]
 }
