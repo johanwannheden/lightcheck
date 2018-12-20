@@ -1,8 +1,9 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
+import { BrowserModule } from '@angular/platform-browser';
+import { NgxMqttClientModule } from 'ngx-mqtt-client';
 import { AppComponent } from './app.component';
+import { MetricsService } from './status/metrics.service';
+
 
 
 @NgModule({
@@ -10,9 +11,18 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+
+    // ngx-mqtt-client
+    NgxMqttClientModule.withOptions({
+      host: 'diskstation',
+      protocol: 'ws',
+      port: 9001,
+      path: '/ws',
+      keepalive: 5
+    })
   ],
-  providers: [],
+  providers: [MetricsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
