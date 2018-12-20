@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import 'rxjs/add/observable/empty';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { Data } from '../model/data.dto';

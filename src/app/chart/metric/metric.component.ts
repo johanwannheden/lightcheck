@@ -11,7 +11,7 @@ const HOURS: number[] = Array.from(Array(24).keys());
 })
 export class MetricComponent implements OnInit {
 
-  public lineChartData: ChartData[] = [{ data: [], label: 'Impulses' }];
+  public lineChartData: ChartData[] = [{ data: [], label: 'kW' }];
   public lineChartLabels: string[] = this.getLineChartLabels();
 
   public lineChartOptions: any = { responsive: true };
@@ -59,8 +59,10 @@ export class MetricComponent implements OnInit {
   private onMetricReceived(metric: Metric): void {
     const hourlyValues = new Array<number>(24);
     this.getHoursFromNow().forEach((value, index) => {
-      hourlyValues[index] = metric.by_hour[value];
+      // convert impulses to kW values: 1000 impulses correspond to 1 kWh
+      hourlyValues[index] = metric.by_hour[value] / 1000;
     });
+
     this.lineChartData[0].data = hourlyValues;
 
     const clone = JSON.parse(JSON.stringify(this.lineChartData));
@@ -73,7 +75,7 @@ export class MetricComponent implements OnInit {
     }
     const fromHour: string = hour + '';
     const toHour: string = hour + 1 + '';
-    return fromHour.padStart(2, '0') + '-' + toHour.padStart(2, '0');
+    return fromHour.padStart(2, '0') + ':00 - ' + toHour.padStart(2, '0') + ':00';
   }
 
   // events
