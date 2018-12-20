@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConnectionStatus, MqttService, SubscriptionGrant } from 'ngx-mqtt-client';
 import { Metric } from './model/metric.dto';
-import { MetricsService } from './status/metrics.service';
+import { MetricsService } from './service/metrics.service';
 
 @Component({
   selector: 'app-root',
