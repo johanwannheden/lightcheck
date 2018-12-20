@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ConnectionStatus, MqttService } from 'ngx-mqtt-client';
-import { Subject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
+import { Subject } from 'rxjs/Subject';
 import { Data } from '../model/data.dto';
 import { DataService } from '../service/data.service';
 

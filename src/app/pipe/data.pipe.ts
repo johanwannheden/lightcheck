@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { Data } from '../model/data.dto';
 
@@ -19,6 +19,6 @@ export class DataPipe implements PipeTransform {
 }
 
 export interface DataSummary {
-    received: string,
-    interval: number
+    received: string;
+    interval: number;
 }

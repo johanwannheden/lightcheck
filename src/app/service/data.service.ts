@@ -1,5 +1,5 @@
-import { EventEmitter, Injectable } from "@angular/core";
-import { Data } from "../model/data.dto";
+import { EventEmitter, Injectable } from '@angular/core';
+import { Data } from '../model/data.dto';
 
 @Injectable()
 export class DataService {
@@ -13,4 +13,4 @@ export class DataService {
             this.dataAdded.emit(data);
         }
     }
-} 
+}

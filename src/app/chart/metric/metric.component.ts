@@ -12,7 +12,7 @@ const HOURS: number[] = Array.from(Array(24).keys());
 export class MetricComponent implements OnInit {
 
   public lineChartData: ChartData[] = [{ data: [], label: 'Impulses' }];
-  public lineChartLabels: string[] = HOURS.map(it => this.generateLabel(it));
+  public lineChartLabels: string[] = this.getLineChartLabels();
 
   public lineChartOptions: any = { responsive: true };
 
@@ -27,8 +27,8 @@ export class MetricComponent implements OnInit {
     },
   ];
 
-  public lineChartLegend: boolean = true;
-  public lineChartType: string = 'line';
+  public lineChartLegend = true;
+  public lineChartType = 'line';
 
   constructor(private _metricsService: MetricsService) { }
 
@@ -36,19 +36,43 @@ export class MetricComponent implements OnInit {
     this._metricsService.metricsAdded.subscribe((metric: Metric) => this.onMetricReceived(metric));
   }
 
-  private onMetricReceived(metric: Metric): void {
-    this.lineChartData[0].data = metric.by_hour.slice();
+  private getHoursFromNow(): number[] {
+    const currentHour = new Date().getHours();
+    const hoursFromMidnight = Array.from(Array(24).keys());
+    const hoursFromNow = new Array<number>(24);
 
-    let clone = JSON.parse(JSON.stringify(this.lineChartData));
+    hoursFromMidnight.forEach((value, index) => {
+      if (index < currentHour) {
+        hoursFromNow[hoursFromNow.length - (currentHour - index)] = value;
+      } else {
+        hoursFromNow[index - currentHour] = value;
+      }
+    });
+
+    return hoursFromNow;
+  }
+
+  private getLineChartLabels(): string[] {
+    return this.getHoursFromNow().map(it => this.generateLabel(it));
+  }
+
+  private onMetricReceived(metric: Metric): void {
+    const hourlyValues = new Array<number>(24);
+    this.getHoursFromNow().forEach((value, index) => {
+      hourlyValues[index] = metric.by_hour[value];
+    });
+    this.lineChartData[0].data = hourlyValues;
+
+    const clone = JSON.parse(JSON.stringify(this.lineChartData));
     this.lineChartData = clone;
   }
 
   private generateLabel(hour: number): string {
-    if (hour == 0) {
+    if (hour === 23) {
       return '23-00';
     }
-    const fromHour: string = hour - 1 + '';
-    const toHour: string = hour + '';
+    const fromHour: string = hour + '';
+    const toHour: string = hour + 1 + '';
     return fromHour.padStart(2, '0') + '-' + toHour.padStart(2, '0');
   }
 
@@ -63,6 +87,6 @@ export class MetricComponent implements OnInit {
 }
 
 interface ChartData {
-  data: number[],
-  label: string | string[]
+  data: number[];
+  label: string | string[];
 }

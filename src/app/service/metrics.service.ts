@@ -14,5 +14,4 @@ export class MetricsService {
       this.metricsAdded.emit(metric);
     }
   }
-
 }
