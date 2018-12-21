@@ -13,7 +13,7 @@ import { MetricsService } from './service/metrics.service';
 import { StatusComponent } from './status/status.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/hourly', pathMatch: 'full' },
+  { path: '', redirectTo: '/daily', pathMatch: 'full' },
   { path: 'hourly', component: HourlyComponent },
   { path: 'daily', component: DailyComponent },
 ];
