@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Metric } from '../../model/metric.dto';
 import { MetricsService } from '../../service/metrics.service';
+import { ChartData } from '../chart-data';
 
 const HOURS: number[] = Array.from(Array(24).keys());
 
@@ -13,11 +14,6 @@ export class DailyComponent implements OnInit {
 
   public lineChartData: ChartData[] = [{ data: [], label: 'kW' }];
   public lineChartLabels: string[] = this.getLineChartLabels();
-
-  public lineChartOptions: any = { responsive: true };
-
-  public lineChartLegend = true;
-  public lineChartType = 'line';
 
   constructor(private _metricsService: MetricsService) { }
 
@@ -60,18 +56,4 @@ export class DailyComponent implements OnInit {
     const toHour: string = hour + 1 + '';
     return fromHour.padStart(2, '0') + ':00 - ' + toHour.padStart(2, '0') + ':00';
   }
-
-  // events
-  public chartClicked(e: any): void {
-    console.log(e);
-  }
-
-  public chartHovered(e: any): void {
-    console.log(e);
-  }
-}
-
-interface ChartData {
-  data: number[];
-  label: string | string[];
 }

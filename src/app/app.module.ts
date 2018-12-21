@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ChartsModule } from 'ng2-charts';
 import { NgxMqttClientModule } from 'ngx-mqtt-client';
 import { AppComponent } from './app.component';
+import { ChartComponent } from './chart/chart.component';
 import { DailyComponent } from './chart/daily/daily.component';
 import { HourlyComponent } from './chart/hourly/hourly.component';
 import { DataPipe } from './pipe/data.pipe';
@@ -24,6 +25,7 @@ const appRoutes: Routes = [
     DailyComponent,
     HourlyComponent,
     DataPipe,
+    ChartComponent,
   ],
   imports: [
     BrowserModule,
