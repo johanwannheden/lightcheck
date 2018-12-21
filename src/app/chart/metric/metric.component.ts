@@ -16,17 +16,6 @@ export class MetricComponent implements OnInit {
 
   public lineChartOptions: any = { responsive: true };
 
-  public lineChartColors: Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-  ];
-
   public lineChartLegend = true;
   public lineChartType = 'line';
 
@@ -39,17 +28,11 @@ export class MetricComponent implements OnInit {
   private getHoursFromNow(): number[] {
     const currentHour = new Date().getHours();
     const hoursFromMidnight = Array.from(Array(24).keys());
-    const hoursFromNow = new Array<number>(24);
 
-    hoursFromMidnight.forEach((value, index) => {
-      if (index < currentHour) {
-        hoursFromNow[hoursFromNow.length - (currentHour - index)] = value;
-      } else {
-        hoursFromNow[index - currentHour] = value;
-      }
-    });
+    const left = hoursFromMidnight.slice(currentHour, hoursFromMidnight.length);
+    const right = hoursFromMidnight.slice(0, currentHour);
 
-    return hoursFromNow;
+    return [...left, ...right];
   }
 
   private getLineChartLabels(): string[] {
