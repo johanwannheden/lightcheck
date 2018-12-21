@@ -5,11 +5,11 @@ import { MetricsService } from '../../service/metrics.service';
 const HOURS: number[] = Array.from(Array(24).keys());
 
 @Component({
-  selector: 'app-metric',
-  templateUrl: './metric.component.html',
-  styleUrls: ['./metric.component.css']
+  selector: 'app-daily',
+  templateUrl: './daily.component.html',
+  styleUrls: ['./daily.component.css']
 })
-export class MetricComponent implements OnInit {
+export class DailyComponent implements OnInit {
 
   public lineChartData: ChartData[] = [{ data: [], label: 'kW' }];
   public lineChartLabels: string[] = this.getLineChartLabels();

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ChartsModule } from 'ng2-charts';
 import { NgxMqttClientModule } from 'ngx-mqtt-client';
 import { AppComponent } from './app.component';
-import { MetricComponent } from './chart/metric/metric.component';
+import { DailyComponent } from './chart/daily/daily.component';
 import { DataPipe } from './pipe/data.pipe';
 import { DataService } from './service/data.service';
 import { MetricsService } from './service/metrics.service';
@@ -14,7 +14,7 @@ import { StatusComponent } from './status/status.component';
   declarations: [
     AppComponent,
     StatusComponent,
-    MetricComponent,
+    DailyComponent,
     DataPipe
   ],
   imports: [
