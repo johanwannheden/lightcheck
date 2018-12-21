@@ -1,24 +1,34 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 import { ChartsModule } from 'ng2-charts';
 import { NgxMqttClientModule } from 'ngx-mqtt-client';
 import { AppComponent } from './app.component';
 import { DailyComponent } from './chart/daily/daily.component';
+import { HourlyComponent } from './chart/hourly/hourly.component';
 import { DataPipe } from './pipe/data.pipe';
 import { DataService } from './service/data.service';
 import { MetricsService } from './service/metrics.service';
 import { StatusComponent } from './status/status.component';
 
+const appRoutes: Routes = [
+  { path: '', redirectTo: '/hourly', pathMatch: 'full' },
+  { path: 'hourly', component: HourlyComponent },
+  { path: 'daily', component: DailyComponent },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     StatusComponent,
     DailyComponent,
-    DataPipe
+    HourlyComponent,
+    DataPipe,
   ],
   imports: [
     BrowserModule,
+
+    RouterModule.forRoot(appRoutes),
 
     // ng-charts
     ChartsModule,
