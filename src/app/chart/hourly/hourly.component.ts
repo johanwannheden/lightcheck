@@ -21,7 +21,7 @@ export class HourlyComponent implements OnInit {
   }
 
   private onMetricReceived(metric: Metric): void {
-    const data: number[] = Util.rotate(metric.by_minute, new Date().getMinutes());
+    const data: number[] = Util.rotate(metric.by_minute, new Date().getMinutes() + 1);
     data.forEach((value, index) => data[index] = data[index] / 1000);
 
     this.lineChartData[0].data = data;
@@ -35,7 +35,7 @@ export class HourlyComponent implements OnInit {
     const currentMinute = new Date().getMinutes();
     const minutes = Array.from(Array(60).keys());
 
-    return Util.rotate(minutes, currentMinute)
+    return Util.rotate(minutes, currentMinute + 1)
       .map((it: number) => it + '')
       .map((it: string) => it.padStart(2, '0'));
   }
