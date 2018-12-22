@@ -2,11 +2,14 @@
 * `ng build --prod`
 * `docker build -t johanwannheden/lightcheck .`
 
-# Export docker image to file
-`docker save -o OUTPUT_FILE lightcheck:latest`
+# Deploy to Docker Hub
+* `docker push johanwannheden/lightcheck:latest`
 
-# Export docker image to Docker Hub
-`docker push johanwannheden/lightcheck:latest`
+# Export to file
+`docker save -o OUTPUT_FILE lightcheck:latest`
 
 # Run docker image
 `docker run -p 80:80 lightcheck:latest`
+
+# Test using docker compose
+`docker-compose up` and `docker-compose down --rmi all`

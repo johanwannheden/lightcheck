@@ -1,0 +1,8 @@
+version: '3.1'
+
+services:
+    app:
+        image: 'johanwannheden/lightcheck:latest'
+        build: '.'
+        ports:
+            - 8080:80
